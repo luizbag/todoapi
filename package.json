@@ -16,6 +16,9 @@
   "dependencies": {
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "inversify": "^6.2.1",
+    "inversify-express-utils": "^6.4.10",
+    "reflect-metadata": "^0.2.2",
     "tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
