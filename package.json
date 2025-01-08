@@ -6,7 +6,7 @@
     "build": "npx tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
     "start": "node dist/main.js",
     "dev": "concurrently \"npx tsc -w\" \"ts-node -r tsconfig-paths/register src/main.ts\"",
-    "test": "ts-jest --verbose --coverage"
+    "test": "jest --verbose --coverage"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +14,9 @@
   "type": "commonjs",
   "description": "",
   "dependencies": {
+    "class-sanitizer": "^1.0.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "inversify": "^6.2.1",

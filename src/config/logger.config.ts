@@ -1,10 +1,10 @@
 import { injectable } from "inversify";
 import { format, createLogger, transports } from "winston";
-
+import { ILogger } from "../interfaces/ILogger";
 const { colorize, combine, json, label, printf, timestamp } = format;
 
 @injectable()
-export class Logger {
+export class Logger implements ILogger {
   constructor(private readonly loggerLabel: string = "Todo API") {}
 
   private readonly consoleTransport = new transports.Console({
@@ -44,19 +44,19 @@ export class Logger {
     exceptionHandlers: [this.consoleTransport, this.exceptionFileTransport],
   });
 
-  public info(message: any, callback?: void) {
-    this.logger.info(message, callback);
+  public info(message: any, ...args: any[]) {
+    this.logger.info(message, ...args);
   }
 
-  public warn(message: any, callback?: void) {
-    this.logger.warn(message, callback);
+  public warn(message: any, ...args: any[]) {
+    this.logger.warn(message, ...args);
   }
 
-  public error(message: any, callback?: void) {
-    this.logger.error(message, callback);
+  public error(message: any, ...args: any[]) {
+    this.logger.error(message, ...args);
   }
 
-  public debug(message: any, callback?: void) {
-    this.logger.debug(message, callback);
+  public debug(message: any, ...args: any[]) {
+    this.logger.debug(message, ...args);
   }
 }

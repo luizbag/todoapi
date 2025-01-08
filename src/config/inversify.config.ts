@@ -1,5 +1,9 @@
 import { Container } from "inversify";
+import { Logger } from "./logger.config";
 
-import "@controllers/todo.controller";
+import "../controllers/todo.controller";
 
-export const container = new Container({ autoBindInjectable: true });
+const container = new Container({ autoBindInjectable: true });
+
+container.bind("ILogger").to(Logger).inRequestScope();
+export { container };
