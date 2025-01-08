@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
-    "build": "npx tsc --project tsconfig.json && tsc-alias -t tsconfig.json",
-    "start": "node dist/index.js",
-    "dev": "concurrently \"npx tsc -w\" \"ts-node -r tsconfig-paths/register src/index.ts\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
+    "start": "node dist/server.js",
+    "dev": "concurrently \"npx tsc -w\" \"ts-node -r tsconfig-paths/register server.ts\"",
+    "test": "ts-jest --verbose --coverage"
   },
   "keywords": [],
   "author": "",
@@ -19,10 +19,19 @@
     "tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
     "@types/express": "^5.0.0",
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.10.5",
+    "@types/request": "^2.48.12",
+    "@types/supertest": "^6.0.2",
     "concurrently": "^9.1.2",
+    "jest": "^29.7.0",
+    "jest-cli": "^29.7.0",
     "nodemon": "^3.1.9",
+    "request": "^2.88.2",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.10",
     "typescript": "^5.7.2"
