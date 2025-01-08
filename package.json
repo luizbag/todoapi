@@ -4,8 +4,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "npx tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
-    "start": "node dist/server.js",
-    "dev": "concurrently \"npx tsc -w\" \"ts-node -r tsconfig-paths/register server.ts\"",
+    "start": "node dist/main.js",
+    "dev": "concurrently \"npx tsc -w\" \"ts-node -r tsconfig-paths/register src/main.ts\"",
     "test": "ts-jest --verbose --coverage"
   },
   "keywords": [],
@@ -19,7 +19,8 @@
     "inversify": "^6.2.1",
     "inversify-express-utils": "^6.4.10",
     "reflect-metadata": "^0.2.2",
-    "tsconfig-paths": "^4.2.0"
+    "tsconfig-paths": "^4.2.0",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
