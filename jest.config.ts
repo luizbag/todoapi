@@ -5,6 +5,4 @@ export default {
   },
   testMatch: ["**/tests/**/*.spec.ts", "**/tests/**/*.test.ts"],
   testEnvironment: "node",
-  globalSetup: "<rootDir>/jest.globalSetup.ts",
-  globalTeardown: "<rootDir>/jest.globalTeardown.ts",
 };

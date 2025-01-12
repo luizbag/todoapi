@@ -6,7 +6,7 @@
     "build": "npx tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
     "start": "node dist/main.js",
     "dev": "concurrently \"npx tsc -w\" \"ts-node -r tsconfig-paths/register src/main.ts\"",
-    "test": "jest --verbose --coverage"
+    "test": "npx prisma migrate reset -f && jest -i"
   },
   "keywords": [],
   "author": "",
