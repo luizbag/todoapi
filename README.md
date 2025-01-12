@@ -13,29 +13,35 @@ This document outlines the architecture for a RESTful to-do list service.
   - **InversifyJS:** For dependency injection.
 
 **2. Project Structure**
+The project is organized into several key directories and files to maintain a clean and modular structure:
 
-```
-todo-list-service/
-├── src/
-│   ├── controllers/
-│   │   └── TodoController.ts
-│   ├── prisma/
-│   │   └── migrations/
-│   │   └── schema.prisma
-│   ├── services/
-│   │   └── TodoService.ts
-│   ├── config/
-│   │   └── inversify.config.ts
-|   |   └── server.config.ts
-|   |   └── logger.config.ts
-│   └── main.ts
-├── tests/
-│   └── TodoController.spec.ts
-│   └── TodoService.spec.ts
-├── package.json
-├── tsconfig.json
-└── .gitignore
-```
+- **`src/`**: Contains the main source code for the application.
+
+  - **`controllers/`**: Houses the controller files that handle HTTP requests and responses.
+    - **`todo.controller.ts`**: Manages CRUD operations for to-do items.
+  - **`interfaces/`**: Houses the interfaces for the application.
+  - **`prisma/`**: Contains Prisma-related files.
+    - **`migrations/`**: Stores database migration files.
+    - **`schema.prisma`**: Defines the database schema.
+  - **`services/`**: Contains service files that encapsulate business logic.
+    - **`todo.service.ts`**: Implements the logic for managing to-do items.
+  - **`repositories/`**: Contains repository files that encapsulate database logic.
+    - **`todo.repository.ts`**: Implements the logic for managing to-do items data.
+  - **`config/`**: Holds configuration files for various aspects of the application.
+    - **`inversify.config.ts`**: Configures dependency injection.
+    - **`server.config.ts`**: Configures server settings.
+    - **`logger.config.ts`**: Configures logging.
+  - **`main.ts`**: The entry point of the application.
+
+- **`tests/`**: Contains test files to ensure the application works as expected.
+
+  - **`todo.controller.test.ts`**: Tests for the `TodoController`.
+
+- **`package.json`**: Lists dependencies and scripts for the project.
+- **`tsconfig.json`**: Configures TypeScript settings.
+- **`.gitignore`**: Specifies files and directories to be ignored by Git.
+
+This structure helps in maintaining a clear separation of concerns, making the codebase easier to manage and scale.
 
 **3. Service Architecture**
 
@@ -44,7 +50,6 @@ todo-list-service/
 - **Utils:** Contains helper functions, such as error handling.
 - **Prisma:** Handles database interactions, migrations, and data seeding.
 - **InversifyJS:** Used for dependency injection to improve code organization and testability.
-  - **`config/inversify.config.ts`:** Registers services and controllers in the Inversify container.
 
 **4. REST Endpoints**
 
