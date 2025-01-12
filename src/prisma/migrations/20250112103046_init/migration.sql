@@ -1,0 +1,7 @@
+-- CreateTable
+CREATE TABLE "TodoItem" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "description" TEXT NOT NULL,
+    "createdOn" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "dueDate" DATETIME
+);
