@@ -5,6 +5,7 @@ import "../controllers/todo.controller";
 import TodoService from "../services/todo.service";
 import { AppOrm } from "../libs";
 import TodoRepository from "../repositories/todo.repository";
+import { RequestValidator } from "./validation.config";
 
 const container = new Container({ autoBindInjectable: true });
 

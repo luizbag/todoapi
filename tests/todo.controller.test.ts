@@ -36,12 +36,16 @@ describe("TodoController", () => {
     expect(response.status).toBe(200);
     expect(response.body.id).not.toBeNull();
   });
-  it("should throw an error if request body is empty", async () => {
+  it("should return validation errors", async () => {
     const response = await supertest(server).post("/todos/");
-    expect(response.status).toBe(400);
-    expect(response.body).toEqual({
-      message: "Invalid request",
-      type: "Bad Request",
+    expect(response.status).toBe(422);
+    expect(response.body.errors).toBeInstanceOf(Array);
+    expect(response.body.errors.length).toBeGreaterThan(0);
+    expect(response.body.errors[0]).toEqual({
+      location: "body",
+      msg: "Invalid value",
+      path: "description",
+      type: "field",
     });
   });
 });

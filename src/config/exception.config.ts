@@ -28,3 +28,9 @@ export class ValidationException extends BaseException {
     super("Validation Error", 400, message);
   }
 }
+
+export class NotFoundException extends BaseException {
+  constructor(message: string) {
+    super("Not Found Error", 404, message);
+  }
+}
