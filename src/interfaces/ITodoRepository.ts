@@ -8,6 +8,5 @@ export interface ITodoRepository {
     id: number,
     todo: Partial<TodoItemDto>
   ): Promise<TodoItemDto | null>;
-  updateTodoStatus(id: number, status: boolean): Promise<TodoItemDto | null>;
-  deleteTodo(id: number): Promise<boolean>;
+  deleteTodo(id: number): Promise<void>;
 }

@@ -15,5 +15,5 @@ model TodoItem {
   description String
   createdOn DateTime @default(now())
   dueDate DateTime?
-  completed Boolean
+  completed Boolean @default(false)
 }

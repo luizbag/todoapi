@@ -8,15 +8,17 @@ export default class TodoRepository implements ITodoRepository {
   constructor(@inject("PrismaClient") private readonly prisma: PrismaClient) {}
 
   public async getAllTodos(): Promise<TodoItemDto[]> {
-    return this.prisma.todoItem.findMany();
+    return await this.prisma.todoItem.findMany();
   }
+
   public async getTodoById(id: number): Promise<TodoItemDto | null> {
-    return this.prisma.todoItem.findUnique({
-      where: { id },
+    return await this.prisma.todoItem.findUnique({
+      where: { id: id },
     });
   }
+
   public async createTodo(todo: TodoItemDto): Promise<TodoItemDto> {
-    return this.prisma.todoItem.create({
+    return await this.prisma.todoItem.create({
       data: {
         description: todo.description!,
         completed: todo.completed || false,
@@ -24,16 +26,27 @@ export default class TodoRepository implements ITodoRepository {
       },
     });
   }
-  updateTodo(
+  public async updateTodo(
     id: number,
     todo: Partial<TodoItemDto>
   ): Promise<TodoItemDto | null> {
-    throw new Error("Method not implemented.");
+    return await this.prisma.todoItem.update({
+      where: {
+        id: Number(id),
+      },
+      data: {
+        description: todo.description,
+        completed: todo.completed,
+        dueDate: todo.dueDate,
+      },
+    });
   }
-  updateTodoStatus(id: number, status: boolean): Promise<TodoItemDto | null> {
-    throw new Error("Method not implemented.");
-  }
-  deleteTodo(id: number): Promise<boolean> {
-    throw new Error("Method not implemented.");
+
+  public async deleteTodo(id: number): Promise<void> {
+    await this.prisma.todoItem.delete({
+      where: {
+        id: Number(id),
+      },
+    });
   }
 }

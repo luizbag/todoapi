@@ -7,7 +7,6 @@ import {
   InternalServerException,
   Logger,
   NotFoundException,
-  ValidationException,
 } from "../config";
 import { PrismaClientValidationError } from "@prisma/client/runtime/library";
 
@@ -18,7 +17,7 @@ export default class TodoService implements ITodoService {
     @inject("ILogger") private readonly log: Logger
   ) {}
 
-  public async createTodoItem(item: TodoItemDto): Promise<TodoItemDto | null> {
+  public async createTodoItem(item: TodoItemDto): Promise<TodoItemDto> {
     try {
       const newItem = await this.repository.createTodo(item);
 
@@ -31,32 +30,15 @@ export default class TodoService implements ITodoService {
     }
   }
 
-  public async getTodoItemById(id: number): Promise<TodoItemDto | null> {
+  public async getTodoItemById(id: number): Promise<TodoItemDto> {
     try {
       const item = await this.repository.getTodoById(id);
       if (item === null)
         throw new NotFoundException("Not found todo with id: " + id);
       return item;
     } catch (error) {
-      this.log.error("Error retrieving todo item by id:", error);
+      this.log.error("Error retrieving todo item by id:" + id, error);
       throw new InternalServerException("Error getting todo item: " + id);
-    }
-  }
-
-  public async updateTodoItemStatus(
-    id: number,
-    status: boolean
-  ): Promise<TodoItemDto | null> {
-    try {
-      const updatedItem = await this.repository.updateTodoStatus(id, status);
-      if (updatedItem === null)
-        throw new NotFoundException("Not found todo with id: " + id);
-      return updatedItem;
-    } catch (error) {
-      this.log.error("Error updating todo item status:", error);
-      throw new InternalServerException(
-        "Error updating todo item status: " + id
-      );
     }
   }
 
@@ -80,14 +62,14 @@ export default class TodoService implements ITodoService {
   public async updateTodoItem(
     id: number,
     item: TodoItemDto
-  ): Promise<TodoItemDto | null> {
+  ): Promise<TodoItemDto> {
     try {
       const updatedItem = await this.repository.updateTodo(id, item);
       if (updatedItem === null)
         throw new NotFoundException("Not found todo with id: " + id);
       return updatedItem;
     } catch (error) {
-      this.log.error("Error updating todo item:", error);
+      this.log.error("Error updating todo item:" + id, error);
       throw new InternalServerException("Error updating todo item: " + id);
     }
   }
@@ -96,8 +78,8 @@ export default class TodoService implements ITodoService {
     try {
       await this.repository.deleteTodo(id);
     } catch (error) {
-      console.error("Error deleting todo item:", error);
-      throw new Error("Could not delete todo item");
+      this.log.error("Error deleting todo item:" + id, error);
+      throw new InternalServerException("Error deleting todo item: " + id);
     }
   }
 }
